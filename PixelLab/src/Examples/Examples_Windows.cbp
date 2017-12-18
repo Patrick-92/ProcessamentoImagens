@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Examples Windows" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../bin/exampleWindows.exe" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="../../bin" />
+				<Option object_output="../../_obj" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="../../include" />
+			<Add directory="../PixelLab" />
+		</Compiler>
+		<Linker>
+			<Add library="..\..\lib\libpixelLab_win.a" />
+			<Add library="..\..\lib\libpng.a" />
+			<Add library="..\..\lib\libz.a" />
+			<Add library="..\..\lib\libglui32.a" />
+			<Add library="libopengl32.a" />
+			<Add library="libglu32.a" />
+			<Add library="..\..\lib\libglut32.a" />
+		</Linker>
+		<Unit filename="test01.1.Opening.Image.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

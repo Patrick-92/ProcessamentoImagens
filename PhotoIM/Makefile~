@@ -1,0 +1,4 @@
+all:
+	g++ -o main Space_filter_II
+.cpp -lglut -lGL -lGLU -lglui ../PixelLab/lib/libpixelLab_linux.a ../PixelLab/lib/libpng12_linux64.a -lz
+	./main

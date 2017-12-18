@@ -1,0 +1,13 @@
+Versions
+--------
+
+PixelLab v0.6 - 28/06/2013 - Current
+- "ifndef" problem fixed
+- PNG problem under Ubuntu 12.04 and 13.04 fixed
+- Two different linux projects were created (32 and 64 bits)
+
+PixelLab v0.5 (First usable version) - 2012
+- Read and write bmp and png files
+- Convert images to pixel matrix and vice-versa
+
+

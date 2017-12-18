@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="PixelLab">
+		<Project filename="PixelLab/PixelLab_Windows.cbp" active="1" />
+		<Project filename="PixelLab/PixelLab_Linux.cbp" />
+		<Project filename="Examples/Examples_Windows.cbp" />
+		<Project filename="Examples/Examples_Linux32.cbp" />
+		<Project filename="Examples/Examples_Linux64.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>
