@@ -41,16 +41,16 @@ int main(int argc, char *argv[])
 
 	GLUI *glui = GLUI_Master.create_glui("Framework");
 
-		obj_panel = new GLUI_Panel(glui, "Curva de Nível" );
-    obj_panel2 = new GLUI_Panel(glui, "Filtro no domínio do espaço" );
-    obj_panel3 = new GLUI_Panel(glui, "Filtro no domínio da frequência" );
-    obj_panel4 = new GLUI_Panel(glui, "Segmentação por threshold automatico e manual" );
+		obj_panel = new GLUI_Panel(glui, "Curva de Nivel" );
+    obj_panel2 = new GLUI_Panel(glui, "Filtro no dominio do espaço" );
+    obj_panel3 = new GLUI_Panel(glui, "Filtro no dominio da frequencia" );
+    obj_panel4 = new GLUI_Panel(glui, "Segmentacao por threshold automatico e manual" );
     obj_panel5 = new GLUI_Panel(glui, "Filtros morfológicos" );
 
 	bTomCurve = new GLUI_Button(obj_panel, "Iniciar", CMD_BTN_1, pointer_cb);
 		bTomCurve->set_w(80);
 
-  bSpaceFilter = new GLUI_Button(obj_panel2, "Operaçoes", CMD_BTN_2, pointer_cb);
+  bSpaceFilter = new GLUI_Button(obj_panel2, "Operacoes", CMD_BTN_2, pointer_cb);
     bSpaceFilter->set_w(80);
 
   bSpaceFilter2 = new GLUI_Button(obj_panel2, "Filtros", CMD_BTN_3, pointer_cb);
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
   bFrequencyFilters = new GLUI_Button(obj_panel3, "Filtros", CMD_BTN_4, pointer_cb);
     bFrequencyFilters->set_w(80);
 
-  bNoiseAdittionMedianFilter = new GLUI_Button(obj_panel3, "Adiçao de ruido e mediana", CMD_BTN_5, pointer_cb);
+  bNoiseAdittionMedianFilter = new GLUI_Button(obj_panel3, "Adicao de ruido e mediana", CMD_BTN_5, pointer_cb);
     bNoiseAdittionMedianFilter->set_w(80);
 
   bImageSegmentation = new GLUI_Button(obj_panel4, "Iniciar", CMD_BTN_6, pointer_cb);
@@ -95,7 +95,7 @@ void pointer_cb (GLUI_Control* control){
 		system("./tomCurve");
 	}
 	if (control->get_id() == CMD_BTN_2) {
-    system("");
+    system("./spaceFilterI");
 	}
   if (control->get_id() == CMD_BTN_3) {
     system("./spaceFilterII");

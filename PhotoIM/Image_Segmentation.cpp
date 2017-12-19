@@ -23,6 +23,7 @@ bool flag_manual_threshold = false;
 
 #define CMD_BTN_1 100
 #define CMD_BTN_2 101
+#define CMD_BTN_3 102
 
 string textFile, textRadius;
 int main_window;
@@ -30,7 +31,7 @@ int main_window;
 GLUI_TextBox     *moo;
 GLUI_EditText    *edittext;
 GLUI_Panel       *obj_panel;
-GLUI_Button	*bImportar, *bSair;
+GLUI_Button	*bImportar, *bSair, *bManualThreshold, *bAutomaticThreshold;
 
 void displayImage1(void);
 void displayImage3(void);
@@ -57,6 +58,10 @@ void init (void) {
 
 void reshape( int x, int y ) {
   glutPostRedisplay();
+}
+
+void idle() {
+   glutPostRedisplay();
 }
 
 void computeUIWidth() {
@@ -298,12 +303,20 @@ void pointer_cb (GLUI_Control* control){
 		incializar();		
 	}
 	if (control->get_id() == CMD_BTN_2) {
-
-	}		
+		flag_manual_threshold = true;
+	}
+	if (control->get_id() == CMD_BTN_3) {
+		automatic_threshold(img1,img2);
+      	flag_manual_threshold = false;
+	}
 }
 
 void incializar (void) {
 	init ();
+
+	glutDestroyWindow(window1);
+	glutDestroyWindow(window2);
+	glutDestroyWindow(window3);
 
 	histogram_data(img1);
 
@@ -319,6 +332,7 @@ void incializar (void) {
 	glutDisplayFunc(displayImage1);
 	glutReshapeWindow(img1->GetWidth(), img1->GetHeight());
 	glutPositionWindow(100, 100);
+	glutIdleFunc(idle);
 
 	//Histograma
 	glutSetWindow (window2);
@@ -329,10 +343,30 @@ void incializar (void) {
 	glutPositionWindow(550, 356);
 	glutReshapeWindow(255, 255);
 	glutKeyboardFunc(key);
+	glutIdleFunc(idle);
 
   	//Janela da Editada
 	glutSetWindow (window3); // Change current window to 2
 	glutDisplayFunc(displayImage3);
 	glutReshapeWindow(img2->GetWidth(), img2->GetHeight());
 	glutPositionWindow(800, 100);
+	glutIdleFunc(idle);
+
+	GLUI *glui = GLUI_Master.create_glui("Segmentacao de Imagens");
+
+	obj_panel = new GLUI_Panel(glui, "Tipo de Threshold" );
+
+	bManualThreshold = new GLUI_Button(obj_panel, "Threshold manual", CMD_BTN_2, pointer_cb);
+		bManualThreshold->set_w(80);
+
+	bAutomaticThreshold = new GLUI_Button(obj_panel, "Threshold automatico", CMD_BTN_3, pointer_cb);
+		bAutomaticThreshold->set_w(80);
+
+	bSair = new GLUI_Button(glui, "Sair", 0, (GLUI_Update_CB)exit);
+		bSair->set_alignment( GLUI_ALIGN_RIGHT );
+		bSair->set_w(50);
+
+	GLUI_Master.set_glutIdleFunc(myGlutIdle);
+
+	glutSwapBuffers();
 }

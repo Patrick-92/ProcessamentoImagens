@@ -24,6 +24,8 @@ int structuring_matrix_size = 0;
 
 #define CMD_BTN_1 100
 #define CMD_BTN_2 101
+#define CMD_BTN_3 102
+#define CMD_BTN_4 103
 
 string textFile, textRadius;
 int main_window;
@@ -31,7 +33,7 @@ int main_window;
 GLUI_TextBox     *moo;
 GLUI_EditText    *edittext;
 GLUI_Panel       *obj_panel;
-GLUI_Button	*bImportar, *bSair;
+GLUI_Button	*bImportar, *bSair, *bInnerEdge, *bOuterEdge, *bInnerOuterEdge;
 
 void displayImage1(void);
 void displayImage3(void);
@@ -533,6 +535,17 @@ void incializar (void) {
 	glutReshapeWindow(img2->GetWidth(), img2->GetHeight());
 	glutPositionWindow(800, 100);
 	glutKeyboardFunc(key);
+
+	GLUI *glui = GLUI_Master.create_glui("Filtros na frequencia");
+
+	obj_panel = new GLUI_Panel(glui, "Tipo de filtro" );
+
+	bInnerEdge = new GLUI_Button(obj_panel, "Borda interna", CMD_BTN_2, pointer_cb);
+	bOuterEdge = new GLUI_Button(obj_panel, "Borda externa", CMD_BTN_3, pointer_cb);
+	bInnerOuterEdge = new GLUI_Button(obj_panel, "Bordas interna e externa", CMD_BTN_4, pointer_cb);
+
+	GLUI_Master.set_glutIdleFunc(myGlutIdle);
+
 }
 
 void myGlutIdle( void ) {
@@ -548,6 +561,14 @@ void pointer_cb (GLUI_Control* control){
 		incializar();		
 	}
 	if (control->get_id() == CMD_BTN_2) {
-
-	}		
+		morphological_erosion();
+      	inner_edge (img1, img3);
+	}
+	if (control->get_id() == CMD_BTN_3) {
+		morphological_dilation();
+      	outer_edge (img1, img3);
+	}
+	if (control->get_id() == CMD_BTN_4) {
+		innerOuter_edge (img1);
+	}
 }

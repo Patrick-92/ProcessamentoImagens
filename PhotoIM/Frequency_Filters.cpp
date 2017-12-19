@@ -42,6 +42,8 @@ PixelLab *imgEspectroInv  = NULL;
 
 #define CMD_BTN_1 100
 #define CMD_BTN_2 101
+#define CMD_BTN_3 102
+#define CMD_BTN_4 103
 
 using namespace std;
 
@@ -56,7 +58,7 @@ int flagFilter = 0;
 GLUI_TextBox     *moo;
 GLUI_EditText    *edittext, *edittext2;
 GLUI_Panel       *obj_panel;
-GLUI_Button	*bImportar, *bAplicarFiltroFrequencia, *bSair;
+GLUI_Button	*bImportar, *bAplicarFiltroFrequencia, *bSair, *bPassaBaixaIdeal, *bPassaAltaIdeal;
 
 void displayOriginal(void);
 void Modify_ideal_high_pass_mask(void);
@@ -456,11 +458,23 @@ int main(int argc, char *argv[])
 	bImportar = new GLUI_Button(glui, "Importar Arquivo", CMD_BTN_1, pointer_cb);
 
 		obj_panel = new GLUI_Panel(glui, "Filtro na Frequencia" );
+    obj_panel->set_w(500);
 
 	edittext2 = new GLUI_EditText( obj_panel, "Raio:", textRadius, CMD_BTN_1, pointer_cb );
-		edittext2->set_w( 150 );
-	bAplicarFiltroFrequencia = new GLUI_Button(obj_panel, "Aplicar", CMD_BTN_2, pointer_cb);
-		bAplicarFiltroFrequencia->set_w(80);
+		edittext2->set_w( 100 );
+    edittext2->set_alignment(GLUI_ALIGN_LEFT);
+
+	bPassaBaixaIdeal = new GLUI_Button(obj_panel, "Passa Baixa Ideal", CMD_BTN_3, pointer_cb);
+		bPassaBaixaIdeal->set_w(80);
+    bPassaBaixaIdeal->set_alignment(GLUI_ALIGN_RIGHT);
+
+  bPassaAltaIdeal = new GLUI_Button(obj_panel, "Passa Alta Ideal", CMD_BTN_4, pointer_cb);
+    bPassaAltaIdeal->set_w(80);
+    bPassaAltaIdeal->set_alignment(GLUI_ALIGN_RIGHT);
+
+  bAplicarFiltroFrequencia = new GLUI_Button(obj_panel, "Aplicar", CMD_BTN_2, pointer_cb);
+    bAplicarFiltroFrequencia->set_w(80);
+    bAplicarFiltroFrequencia->set_alignment(GLUI_ALIGN_LEFT);
 
 	bSair = new GLUI_Button(glui, "Sair", 0, (GLUI_Update_CB)exit);
 		bSair->set_alignment( GLUI_ALIGN_RIGHT );
@@ -502,9 +516,16 @@ void pointer_cb (GLUI_Control* control){
 
 				break;
 	}
+  if (control->get_id() == CMD_BTN_3) {
+    flagFilter = 1;
+  }
+  if (control->get_id() == CMD_BTN_4) {
+    flagFilter = 2;
+  }
 		do_Fourier();
 		
 	}
+
 }
 
 void displayOriginal(void) {
