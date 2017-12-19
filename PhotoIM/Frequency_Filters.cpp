@@ -497,7 +497,8 @@ void myGlutIdle( void ) {
 
 void pointer_cb (GLUI_Control* control){
 	if (control->get_id() == CMD_BTN_1) {
-		displayOriginal();		
+		displayOriginal();
+		do_Fourier();
 	}
 	if (control->get_id() == CMD_BTN_2) {
 		switch (flagFilter)
@@ -506,26 +507,24 @@ void pointer_cb (GLUI_Control* control){
 				cout << "Filtro Passa Baixa Ideal" << endl;
 				raio = atoi(string(edittext2->get_text()).c_str());
 				Modify_ideal_low_pass_mask();
-
+				do_Fourier();
 				break;
 			case 2:
 				cout << "Filtro Passa Alta Ideal" << endl;
 
 				raio = atoi(string(edittext2->get_text()).c_str());
 				Modify_ideal_high_pass_mask();
-
+				do_Fourier();
 				break;
+		}
 	}
-  if (control->get_id() == CMD_BTN_3) {
-    flagFilter = 1;
-  }
-  if (control->get_id() == CMD_BTN_4) {
-    flagFilter = 2;
-  }
-		do_Fourier();
-		
-	}
-
+	if (control->get_id() == CMD_BTN_3) {
+    	flagFilter = 1;
+    
+  	}
+	if (control->get_id() == CMD_BTN_4) {
+    	flagFilter = 2;
+  	}
 }
 
 void displayOriginal(void) {

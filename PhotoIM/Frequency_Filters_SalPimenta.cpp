@@ -43,6 +43,7 @@ PixelLab *imgEspectroInv  = NULL;
 #define CMD_BTN_1 100
 #define CMD_BTN_2 101
 #define CMD_BTN_3 102
+#define CMD_BTN_4 102
 
 using namespace std;
 
@@ -58,7 +59,7 @@ float porcentagem = 0;
 GLUI_TextBox     *moo;
 GLUI_EditText    *edittext, *edittext2, *edittext3;
 GLUI_Panel       *obj_panel;
-GLUI_Button	*bImportar, *bAplicarFiltroFrequencia, *bSair, *bFile;
+GLUI_Button	*bImportar, *bAplicarFiltroFrequencia, *bSair, *bFile, *bMedian;
 
 void displayOriginal(void);
 void Modify_ideal_high_pass_mask(void);
@@ -529,8 +530,11 @@ int main(int argc, char *argv[])
 
   edittext2 = new GLUI_EditText( obj_panel, "Raio:", textRadius, CMD_BTN_2, pointer_cb );
     edittext2->set_w( 150 );
-  bAplicarFiltroFrequencia = new GLUI_Button(obj_panel, "Aplicar", CMD_BTN_2, pointer_cb);
+  bAplicarFiltroFrequencia = new GLUI_Button(obj_panel, "Aplicar manualmente", CMD_BTN_2, pointer_cb);
     bAplicarFiltroFrequencia->set_w(80);
+
+  bMedian = new GLUI_Button(obj_panel, "Aplicar mediana", CMD_BTN_4, pointer_cb);
+    bMedian->set_w(80);
 
   bSair = new GLUI_Button(glui, "Sair", 0, (GLUI_Update_CB)exit);
     bSair->set_alignment( GLUI_ALIGN_RIGHT );
@@ -561,6 +565,9 @@ void pointer_cb (GLUI_Control* control){
 	}
   if (control->get_id() == CMD_BTN_3) {
     displayOriginal();
+  }
+  if (control->get_id() == CMD_BTN_4) {
+    filtroMediana(img);
   }
 }
 
